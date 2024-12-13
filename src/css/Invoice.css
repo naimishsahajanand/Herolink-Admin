@@ -1,0 +1,83 @@
+.invoice {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    background-color: white;
+}
+
+.invoice h3 {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+}
+
+.invoice p {
+    margin: 0;
+}
+
+.table {
+    margin-bottom: 0rem;
+    border-color: black
+}
+
+.table-bordered {
+    margin-top: 20px;
+    border: 1px solid black;
+}
+
+.table-bordered th,
+.table-bordered td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-bordered th {
+    font-weight: bold;
+}
+
+.table-bordered td {
+    padding: 8px;
+}
+
+.order-name {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 10px;
+}
+
+
+
+/* // Tailor Image Invoice  */
+.machine-img {
+    width: 60px;
+    /* Adjust as needed */
+}
+
+.border-bottom {
+    border-bottom: 2px solid red;
+    /* Optional for date field underline */
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.table-bordered td,
+.table-bordered th {
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+p {
+    margin: 0;
+    font-size: 14px;
+}
