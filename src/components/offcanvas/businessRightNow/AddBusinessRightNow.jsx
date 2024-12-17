@@ -50,11 +50,8 @@ const AddBusinessRightNow = ({ show, handleClose, fetchBusinessRightNowData }) =
         try {
 
             const data = await axiosInstance.post(`/admin/your-business-at-right-now/add`, payload, authHeader());
-            console.log('====================================');
-            console.log("categorydata", data);
-            console.log('====================================');
             if (data?.data?.status === true) {
-                toast.success("Successfully Startup Stage Added!");
+                toast.success("Successfully Your Business Right Now Added!");
                 setFormData(initialState);
                 handleClose();
                 fetchBusinessRightNowData();

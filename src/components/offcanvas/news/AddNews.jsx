@@ -13,7 +13,7 @@ const initialState = {
     status: "active"
 }
 
-const AddNews = ({ show, handleClose, fetchNewsData }) => {
+const   AddNews = ({ show, handleClose, fetchNewsData }) => {
     const token = localStorage.getItem("adminToken");
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,9 +53,6 @@ const AddNews = ({ show, handleClose, fetchNewsData }) => {
         try {
 
             const data = await axiosInstance.post(`/admin/news/add`, payload, authImageHeader());
-            console.log('====================================');
-            console.log("categorydata", data);
-            console.log('====================================');
             if (data?.data?.status === true) {
                 toast.success("Successfully News Added!");
                 setFormData(initialState);

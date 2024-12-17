@@ -4,8 +4,10 @@ import axiosInstance, { authHeader } from "../../helper/axios";
 import toast from "react-hot-toast";
 
 import DeleteModal from "../../components/modal/delete/DeleteModal";
-import AddConsumer from "../../components/offcanvas/consumer/AddConsumer";
-import EditConsumer from "../../components/offcanvas/consumer/EditConsumer";
+// import AddConsumer from "../../components/offcanvas/consumer/AddConsumer";
+// import EditConsumer from "../../components/offcanvas/consumer/EditConsumer";
+import AddConsumer from "../../components/modal/consumer/AddConsumer";
+import EditConsumer from "../../components/modal/consumer/EditConsumer";
 
 const Consumer = () => {
     const [data, setData] = useState([]);
@@ -40,7 +42,6 @@ const Consumer = () => {
         try {
 
             const data = await axiosInstance.get(`/admin/consumer-segment/list`, authHeader());
-            console.log("data", data?.data?.status);
 
 
             if (data?.data?.status === true) {
@@ -82,21 +83,38 @@ const Consumer = () => {
         {
             name: 'ID',
             selector: (_, index) => (currentPage - 1) * perPage + (index + 1),
-            width: '400px',
+            width: '100px',
+            left: true,
         },
         {
             name: 'Consumer Segment',
             selector: row => row.name,
-            width: '400px'
-
+            left: true,
+            width: '300px'
         },
         {
             name: 'Status',
             selector: row => <div className={`m-auto ${row.status === "active" ? "active" : "in-active"}`}>
                 {row.status}
             </div>,
-            width: '400px'
         },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+
         {
             name: 'Action',
             selector: row => (
@@ -112,21 +130,24 @@ const Consumer = () => {
                         }} style={{ cursor: 'pointer', height: '20px', width: '20px' }} />
                     </div>
                 </div>
-            )
+            ),
+            width: '100px'
         }
     ];
+
     const customStyles = {
         table: {
             style: {
                 backgroundColor: "#fff0",
-                color: '#FFF'
+                color: '#FFF',
             },
         },
         rows: {
             style: {
                 backgroundColor: "#fff0 ",
                 color: '#FFF',
-
+                paddingLeft: '20px',
+                paddingRight: '20px',
             },
         },
         headRow: {
@@ -135,6 +156,18 @@ const Consumer = () => {
                 color: '#FFF',
                 fontSize: '14px',
                 borderBottom: '1px solid #FFF',
+                paddingLeft: '20px',
+                paddingRight: '20px',
+            },
+        },
+        headerCell: {
+            style: {
+                backgroundColor: "#fff0",
+                color: '#FFF',
+                fontSize: '14px',
+                borderBottom: '1px solid #FFF',
+                paddingLeft: '20px',
+                paddingRight: '20px',
 
             },
         },
@@ -147,8 +180,8 @@ const Consumer = () => {
     };
 
 
+
     const filteredData = data?.filter((item) => {
-        console.log("item", item);
 
         const searchStr = `${item.name} ${item?.role}`.toLowerCase();
         return searchStr.includes(filterText.toLowerCase());
@@ -210,6 +243,17 @@ const Consumer = () => {
                                         // theme={2 === 1 ? "dark" : "default"}
                                         customStyles={customStyles}
                                         theme="dark"
+                                        noDataComponent={
+                                            <div style={{
+                                                backgroundColor: "#1b19198f",
+                                                color: "#FFF",
+                                                padding: "20px",
+                                                textAlign: "center",
+                                                width: '100%'
+                                            }}>
+                                                No data found.
+                                            </div>
+                                        }
                                     />
                                 </div>
                             </div>

@@ -16,16 +16,10 @@ import { useNavigate } from 'react-router-dom';
 const Dashboard = () => {
     const navigate = useNavigate();
     const [data, setData] = useState({});
-    console.log('====================================');
-    console.log("data", data);
-    console.log('====================================');
-
     const fetchDashboardData = async () => {
         try {
 
             const data = await axiosInstance.get(`/admin/dashboard`, authHeader());
-            console.log("data", data?.data?.status);
-
 
             if (data?.data?.status === true) {
                 setData(data?.data?.data);

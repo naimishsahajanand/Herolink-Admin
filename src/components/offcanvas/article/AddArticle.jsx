@@ -39,6 +39,7 @@ const AddArticle = ({ show, handleClose, fetchArticleData }) => {
             description: data
         }));
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
@@ -53,9 +54,6 @@ const AddArticle = ({ show, handleClose, fetchArticleData }) => {
         try {
 
             const data = await axiosInstance.post(`/admin/article/add`, payload, authImageHeader());
-            console.log('====================================');
-            console.log("categorydata", data);
-            console.log('====================================');
             if (data?.data?.status === true) {
                 toast.success("Successfully Article Added!");
                 setFormData(initialState);
@@ -122,6 +120,7 @@ const AddArticle = ({ show, handleClose, fetchArticleData }) => {
                                 }}
                             />
                         </div>
+                        
                         <div className="mb-3">
                             <label className="form-label">Status: *</label>
                             <div>

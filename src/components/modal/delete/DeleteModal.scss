@@ -4,7 +4,7 @@
 .delete-modal {
     .modal-content {
         background-color: #111111;
-        border: 1.5px solid rgba(255, 255, 255, .2);
+        // border: 1.5px solid rgba(255, 255, 255, .2);
     }
 
     &.status .modal-body .icon {
@@ -27,11 +27,14 @@
             box-shadow: none;
         }
 
-
+        button:focus {
+            outline: 0;
+            box-shadow: none;
+        }
     }
 
     .modal-body {
-        padding: 20px 15px 10px 23px;
+        padding: 10px 15px 10px 23px;
 
         .icon {
             font-size: 8rem;
@@ -53,11 +56,11 @@
             }
 
             p {
-                font-size: 16px;
-                font-weight: 400;
+                font-size: 18px;
+                font-weight: 500;
                 color: $color1;
-                margin-bottom: 12px;
-                text-align: left;
+                margin-bottom: 5px;
+                text-align: center;
 
             }
         }
@@ -65,9 +68,9 @@
 
     .modal-footer {
         border: none;
-        justify-content: end;
+        justify-content: center;
         gap: 12px;
-        padding: 0 15px 28px 15px !important;
+        padding: 0 15px 35px 15px !important;
 
         button {
             font-size: 16px;
@@ -75,7 +78,7 @@
             color: $color1;
             border: none;
             padding: 8px 30px;
-            border-radius: 5px;
+            border-radius: 10px;
         }
 
         .close-btn {
@@ -102,4 +105,10 @@
 
 .modal-title {
     color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 600;
+    padding-top: 35px;
 }

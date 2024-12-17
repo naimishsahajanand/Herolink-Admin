@@ -1,23 +1,21 @@
-
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import axiosInstance, { authHeader } from '../../helper/axios';
+import axiosInstance, { authHeader } from '../../../helper/axios';
 import toast from 'react-hot-toast';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Modal from "react-bootstrap/Modal";
+import './Form.scss';
 
 const initialState = {
     name: "",
-    description: "",
     status: "active"
 }
 
-const AddPlan = ({ show, handleClose, fetchPlanData }) => {
+const AddCategory = ({ show, handleClose, fetchCategoryData }) => {
+
     const token = localStorage.getItem("adminToken");
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState(initialState);
-    const [editorData, setEditorData] = useState('');
 
     const handleInputChange = (e) => {
         const { name, value, files, type } = e.target;
@@ -29,36 +27,24 @@ const AddPlan = ({ show, handleClose, fetchPlanData }) => {
         }
     };
 
-    const handleChangeEditor = (event, editor) => {
-        const data = editor.getData();
 
-        setEditorData(data);
-        setFormData((prev) => ({
-            ...prev,
-            description: data
-        }));
-    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
 
         const payload = {
             name: formData?.name,
-            description: formData?.description,
             status: formData?.status
         }
 
         try {
 
-            const data = await axiosInstance.post(`/admin/plan/add`, payload, authHeader());
-            console.log('====================================');
-            console.log("categorydata", data);
-            console.log('====================================');
+            const data = await axiosInstance.post(`/admin/category/add`, payload, authHeader());
             if (data?.data?.status === true) {
-                toast.success("Successfully Plan Added!");
+                toast.success("Successfully Category Added!");
                 setFormData(initialState);
                 handleClose();
-                fetchPlanData();
+                fetchCategoryData();
             } else {
                 toast.error(data?.data?.message);
             }
@@ -69,15 +55,16 @@ const AddPlan = ({ show, handleClose, fetchPlanData }) => {
         }
     };
 
-
     return (
-        <>
-            <Offcanvas show={show} onHide={handleClose} placement="end" className="add-offcanvas">
-                <div className="offcanvas-header">
-                    <h4 id="offcanvasAddorderLabel">Add Plan</h4>
-                    <button type="button" className="btn-close text-reset" onClick={handleClose} />
-                </div>
-                <div className="offcanvas-body">
+        <Modal centered show={show} onHide={handleClose} className="form-modal">
+            <div className="modal-header" closeButton>
+                <h5 className="modal-title" id="deleteModalLabel">Add Category</h5>
+
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>
+
+            </div>
+            <div className="modal-body">
+                <div className="">
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="name" className="form-label">Name: *</label>
@@ -92,21 +79,7 @@ const AddPlan = ({ show, handleClose, fetchPlanData }) => {
                                 required
                             />
                         </div>
-                        <div>
-                            <label htmlFor="name" className="form-label">Description: *</label>
-                            <CKEditor
-                                name="description"
-                                id="description"
-                                editor={ClassicEditor}
-                                data={editorData}
-                                className="form-control"
-                                required
-                                onChange={handleChangeEditor}
-                                style={{
-                                    padding: '15px'
-                                }}
-                            />
-                        </div>
+
                         <div className="mb-3">
                             <label className="form-label">Status: *</label>
                             <div>
@@ -137,17 +110,18 @@ const AddPlan = ({ show, handleClose, fetchPlanData }) => {
                             </div>
                         </div>
 
-                        <div className="text-end">
-                            <button type="submit" className="submit-btn" disabled={isSubmitting}>
+                        <div className="modal-footer">
+                            {/* <button type="button" className="delete-btn" onClick={handleClose} >Close</button> */}
+
+                            <button type="submit" className="back-btn submit" disabled={isSubmitting}>
                                 {isSubmitting ? "Submitting..." : "Submit"}
                             </button>
                         </div>
                     </form>
                 </div>
-            </Offcanvas>
-        </>
-    );
-};
+            </div>
+        </Modal>
+    )
+}
 
-export default AddPlan;
-
+export default AddCategory

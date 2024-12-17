@@ -56,6 +56,13 @@ input:focus {
   border-color: #ffff !important;
 }
 
+/* file input */
+::-webkit-file-upload-button {
+  // background-color: rgba(255, 255, 255, .1) !important;
+  // color: #FFF !important;
+  // border: 0 !important;
+}
+
 small,
 .small {
   font-size: 0.875em;
@@ -315,11 +322,15 @@ small,
 .login-box .left-box form .form-control {
   padding: 12px;
   background-color: #1C1C1E;
-  color: #808fa7;
+  color: #ffff;
   font-weight: 500;
   font-size: 16px;
   border-radius: 10px;
   width: 90%;
+}
+
+.border-danger {
+  border: 1px solid #ff0000 !important;
 }
 
 .login-box .left-box form .form-control::placeholder {
@@ -456,8 +467,20 @@ small,
   cursor: pointer;
 }
 
+.error-eye {
+  position: absolute;
+  top: 35%;
+  right: 60px;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  color: $color4;
+  cursor: pointer;
+}
+
 .text-danger {
-  color: rgb(177, 80, 80);
+  color: #ff0000 !important;
   font-size: 14px;
   margin-top: 5px;
 }
@@ -816,6 +839,10 @@ small,
   cursor: pointer;
 }
 
+
+.back-btn.submit {
+  width: fit-content;
+}
 
 .offcanvas.offcanvas-end {
   border-left: none;
@@ -1449,9 +1476,9 @@ table.dataTable td {
 }
 
 .view-section .content-new .form-label {
-  font-size: 13px;
-  font-weight: 500;
-  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
+  // text-transform: uppercase;
   color: rgba(255, 255, 255, 1);
 }
 
@@ -1466,8 +1493,23 @@ table.dataTable td {
   border: 0.5px solid rgba(56, 56, 58, 1);
 }
 
+.view-section .content-new .listing-blanck {
+  padding: 18px;
+  border-radius: 10px;
+  background-color: rgba(28, 28, 30, 1);
+  border: 0.5px solid rgba(56, 56, 58, 1);
+}
+
+.view-section .content-new .listing {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(28, 28, 30, 1);
+  border: 0.5px solid rgba(56, 56, 58, 1);
+}
+
 .view-section .content-new .form-control::placeholder {
-  color: #972D2D;
+  // color: #972D2D;
+  color: #FFFF;
 }
 
 .view-section .content-new .form-control:focus,
@@ -1635,7 +1677,6 @@ table.dataTable td {
 
 .ck.ck-toolbar {
   background-color: #1c1c1e !important;
-  border: 1px solid #1c1c1e !important;
 }
 
 .ck-reset_all :not(.ck-reset_all-excluded *),
@@ -1654,7 +1695,7 @@ a.ck.ck-button.ck-on {
 }
 
 .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content {
-  border: solid #000000 !important;
+  border: solid #111111 !important;
 }
 
 .ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable) {
@@ -1694,4 +1735,32 @@ a.ck.ck-button.ck-on {
   align-items: center;
   border-radius: 8px;
   cursor: pointer;
+}
+
+
+
+// Data-Table css
+.eDDyiR {
+  max-width: 200% !important;
+  min-width: 200px !important;
+}
+
+/* Change color of the date input icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  /* Inverts the color to white */
+  cursor: pointer;
+  /* Ensures the pointer changes to a hand */
+}
+
+/* Change color of the time input icon */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  /* Inverts the color to white */
+  cursor: pointer;
+}
+
+.recomanded-text {
+  color: #fff;
+  margin-top: 5px;
 }

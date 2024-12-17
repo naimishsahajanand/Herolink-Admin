@@ -42,12 +42,7 @@ const Users = () => {
             // const params = new URLSearchParams({
             //     search: filterText,
             // });
-            // console.log("params");
-
-
             const data = await axiosInstance.get(`/admin/users/list`, authHeader());
-            console.log("data", data?.data?.status);
-
 
             if (data?.data?.status === true) {
                 setData(data?.data?.data);
@@ -86,9 +81,6 @@ const Users = () => {
         try {
             const newStatus = currentStatus === "active" ? "inactive" : "active";
             const response = await axiosInstance.get(`/admin/users/status-change/${id}`, authHeader());
-            console.log('====================================');
-            console.log("response", response);
-            console.log('====================================');
             if (response.status === 200) {
                 setData(prevData =>
                     prevData.map(item =>
@@ -111,15 +103,20 @@ const Users = () => {
         {
             name: 'ID',
             selector: (_, index) => (currentPage - 1) * perPage + (index + 1),
-            width: '200px'
+            width: '100px',
+            left: true,
         },
         {
             name: 'Mobile Number',
             selector: row => row.mobileNumber,
+            left: true,
+
         },
         {
             name: 'Role',
             selector: row => row.role,
+            left: true,
+            width: '150px',
         },
         {
             name: "Profile Complete",
@@ -148,13 +145,14 @@ const Users = () => {
                     </Flex>
                 );
             },
-            width: "200px"
-        },
+            left: true,
 
+        },
         {
             name: 'Created Date',
             selector: row => new Date(row?.createdAt).toISOString().split('T')[0],
-
+            left: true,
+            width: '150px',
         },
         {
             name: 'Status',
@@ -166,8 +164,12 @@ const Users = () => {
                     onChange={() => handleStatusChange(row.id, row.status)}
                 />
             ),
+            left: true
         },
-
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
         {
             name: 'Action',
             selector: row => (
@@ -184,7 +186,11 @@ const Users = () => {
                         }} style={{ cursor: 'pointer', height: '20px', width: '20px' }} />
                     </div>
                 </div>
-            )
+            ),
+            // width: '150px', 
+            width: '100px'
+
+
         }
     ];
     const customStyles = {
@@ -192,16 +198,14 @@ const Users = () => {
             style: {
                 backgroundColor: "#fff0",
                 color: '#FFF',
-                width: "100%",
-                paddingLeft: '20px',
-                paddingRight: '20px'
             },
         },
         rows: {
             style: {
                 backgroundColor: "#fff0 ",
                 color: '#FFF',
-
+                paddingLeft: '20px',
+                paddingRight: '20px',
             },
         },
         headRow: {
@@ -210,6 +214,18 @@ const Users = () => {
                 color: '#FFF',
                 fontSize: '14px',
                 borderBottom: '1px solid #FFF',
+                paddingLeft: '20px',
+                paddingRight: '20px',
+            },
+        },
+        headerCell: {
+            style: {
+                backgroundColor: "#fff0",
+                color: '#FFF',
+                fontSize: '14px',
+                borderBottom: '1px solid #FFF',
+                paddingLeft: '20px',
+                paddingRight: '20px',
 
             },
         },
@@ -224,8 +240,8 @@ const Users = () => {
 
 
 
+
     const filteredData = data?.filter((item) => {
-        console.log("item", item);
 
         const searchStr = `${item.mobileNumber} ${item?.role}`.toLowerCase();
         return searchStr.includes(filterText.toLowerCase());
@@ -289,7 +305,7 @@ const Users = () => {
                                         customStyles={customStyles}
                                         noDataComponent={
                                             <div style={{
-                                                backgroundColor: "#1b19198f", // Set your desired background color
+                                                backgroundColor: "#1b19198f",
                                                 color: "#FFF",
                                                 padding: "20px",
                                                 textAlign: "center",

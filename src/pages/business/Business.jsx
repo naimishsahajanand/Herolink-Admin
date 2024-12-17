@@ -4,8 +4,10 @@ import axiosInstance, { authHeader } from "../../helper/axios";
 import toast from "react-hot-toast";
 import DeleteModal from "../../components/modal/delete/DeleteModal";
 import { Link } from "react-router-dom";
-import AddBusiness from "../../components/offcanvas/business/AddBusiness";
-import EditBusiness from "../../components/offcanvas/business/EditBusiness";
+// import AddBusiness from "../../components/offcanvas/business/AddBusiness";
+// import EditBusiness from "../../components/offcanvas/business/EditBusiness";
+import AddBusiness from "../../components/modal/business/AddBusiness";
+import EditBusiness from "../../components/modal/business/EditBusiness";
 
 const Business = () => {
     const [data, setData] = useState([]);
@@ -39,8 +41,6 @@ const Business = () => {
         try {
 
             const data = await axiosInstance.get(`/admin/business/list`, authHeader());
-            console.log("data", data?.data?.status);
-
 
             if (data?.data?.status === true) {
                 setData(data?.data?.data);
@@ -81,20 +81,42 @@ const Business = () => {
         {
             name: 'ID',
             selector: (_, index) => (currentPage - 1) * perPage + (index + 1),
-            width: '400px',
+            // cell: (_, index) => (
+            //     <div style={{ width: "199px" }}>
+            //         {(currentPage - 1) * perPage + (index + 1)}
+            //     </div>
+            // ),
+            // width: '199px',
+            width: '100px',
+            left: true,
         },
         {
             name: 'Business Model',
             selector: row => row.name,
-            width: '400px'
-
+            width: '300px',
+            left: true,
         },
         {
             name: 'Status',
             selector: row => <div className={`m-auto ${row.status === "active" ? "active" : "in-active"}`}>
                 {row.status}
             </div>,
-            width: '400px'
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
         },
         {
             name: 'Action',
@@ -111,21 +133,24 @@ const Business = () => {
                         }} style={{ cursor: 'pointer', height: '20px', width: '20px' }} />
                     </div>
                 </div>
-            )
+            ),
+            width: '100px',
         }
     ];
+
     const customStyles = {
         table: {
             style: {
                 backgroundColor: "#fff0",
-                color: '#FFF'
+                color: '#FFF',
             },
         },
         rows: {
             style: {
                 backgroundColor: "#fff0 ",
                 color: '#FFF',
-
+                paddingLeft: '20px',
+                paddingRight: '20px',
             },
         },
         headRow: {
@@ -134,6 +159,18 @@ const Business = () => {
                 color: '#FFF',
                 fontSize: '14px',
                 borderBottom: '1px solid #FFF',
+                paddingLeft: '20px',
+                paddingRight: '20px',
+            },
+        },
+        headerCell: {
+            style: {
+                backgroundColor: "#fff0",
+                color: '#FFF',
+                fontSize: '14px',
+                borderBottom: '1px solid #FFF',
+                paddingLeft: '20px',
+                paddingRight: '20px',
 
             },
         },
@@ -146,7 +183,6 @@ const Business = () => {
     };
 
     const filteredData = data?.filter((item) => {
-        console.log("item", item);
 
         const searchStr = `${item.name} ${item?.role}`.toLowerCase();
         return searchStr.includes(filterText.toLowerCase());
@@ -208,6 +244,17 @@ const Business = () => {
                                         // theme={2 === 1 ? "dark" : "default"}
                                         customStyles={customStyles}
                                         theme="dark"
+                                        noDataComponent={
+                                            <div style={{
+                                                backgroundColor: "#1b19198f",
+                                                color: "#FFF",
+                                                padding: "20px",
+                                                textAlign: "center",
+                                                width: '100%'
+                                            }}>
+                                                No data found.
+                                            </div>
+                                        }
                                     />
                                 </div>
                             </div>

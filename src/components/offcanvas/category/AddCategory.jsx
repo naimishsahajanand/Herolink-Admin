@@ -38,9 +38,6 @@ const AddCategory = ({ show, handleClose, fetchCategoryData }) => {
         try {
 
             const data = await axiosInstance.post(`/admin/category/add`, payload, authHeader());
-            console.log('====================================');
-            console.log("categorydata", data);
-            console.log('====================================');
             if (data?.data?.status === true) {
                 toast.success("Successfully Category Added!");
                 setFormData(initialState);

@@ -46,8 +46,6 @@ const Login = () => {
 
         try {
             const res = await axiosInstance.post("/admin/login", formData, authHeader())
-            console.log("res:-------", res);
-
             if (res?.data?.status === true) {
                 toast.success("Successfully logged in!");
                 localStorage.setItem("Admin-Token-Herolinks", res?.data?.data?.token);
@@ -58,6 +56,8 @@ const Login = () => {
                     email: "",
                     password: ""
                 })
+                setEmailError('');
+                setPasswordError('');
             } else {
                 toast.error(res?.data?.message);
             }
@@ -77,7 +77,6 @@ const Login = () => {
                                 <h4 className="mb-2">Welcome Back ! <span>👋</span></h4>
                                 <h4 className="mb-2">Sign In </h4>
                                 <p>Please provide the required details for further proceed</p>
-
                             </div>
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-4">
@@ -86,12 +85,12 @@ const Login = () => {
                                         type="text"
                                         id="email"
                                         name="email"
-                                        className="form-control"
+                                        className={`form-control ${emailError ? 'border-danger' : ''}`}
                                         placeholder="Enter Your Email Address"
                                         value={formData.email}
                                         onChange={handleChange}
                                         autoComplete='off' />
-                                    <p className='text-danger'>{emailError}</p>
+                                    {emailError && <p className='text-danger'>{emailError}</p>}
 
                                 </div>
                                 <div className="mb-5">
@@ -100,13 +99,13 @@ const Login = () => {
                                         <input
                                             type={isPassword}
                                             name='password'
-                                            className="form-control"
+                                            className={`form-control ${passwordError ? 'border-danger' : ''}`}
                                             placeholder="Password"
                                             onChange={handleChange}
                                             value={formData.password}
                                             autoComplete='off'
                                         />
-                                        <a className='eye-btn'>
+                                        <a className={`${passwordError ? 'error-eye' : 'eye-btn'}`}>
                                             {
                                                 isPassword === "password" ?
                                                     <i className="ri-eye-fill" onClick={() => setIsPassword("text")}></i>

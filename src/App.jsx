@@ -5,12 +5,12 @@ import AppRoutes from './Routes';
 import { Toaster } from 'react-hot-toast';
 
 const App = () => {
-  return (
-    <>
-      <AppRoutes />
-      <Toaster />
-    </>
-  )
+    return (
+        <>
+            <AppRoutes />
+            <Toaster />
+        </>
+    )
 }
 
 export default App

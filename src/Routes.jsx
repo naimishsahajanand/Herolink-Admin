@@ -14,6 +14,13 @@ import BusinessRightNow from './pages/businessRightNow/BusinessRightNow';
 import Plan from './pages/plan/Plan';
 import Article from './pages/article/Article';
 import News from './pages/news/News';
+import AddArticle from './pages/article/AddArticle';
+import EditArticle from './pages/article/EditArticle';
+import AddNews from './pages/news/AddNews';
+import EditNews from './pages/news/EditNews';
+import Schedulenotification from './pages/schedulenotification/Schedulenotification';
+import AddScheduleNotification from './pages/schedulenotification/AddScheduleNotification';
+import EditScheduleNotification from './pages/schedulenotification/EditScheduleNotification';
 
 const AppRoutes = () => {
     return (
@@ -23,7 +30,6 @@ const AppRoutes = () => {
                 <Route path="/admin/dashboard" element={<Dashboard />} />
                 <Route path="/admin/users" element={<Users />} />
                 <Route path="/users/view" element={<ViewUsers />} />
-
                 <Route path="/admin/category" element={<Category />} />
                 <Route path="/admin/industry" element={<Industry />} />
                 <Route path='/admin/business' element={<Business />} />
@@ -32,9 +38,14 @@ const AppRoutes = () => {
                 <Route path='/admin/your-business-right-now' element={<BusinessRightNow />} />
                 <Route path='/admin/plan' element={<Plan />} />
                 <Route path='/admin/article' element={<Article />} />
+                <Route path='/admin/add-article' element={<AddArticle />} />
+                <Route path='/admin/edit-article' element={<EditArticle />} />
                 <Route path='/admin/news' element={<News />} />
-
-
+                <Route path='/admin/add-news' element={<AddNews />} />
+                <Route path='/admin/edit-news' element={<EditNews />} />
+                <Route path='/admin/notification' element={<Schedulenotification />} />
+                <Route path='/admin/add-notification' element={<AddScheduleNotification />} />
+                <Route path='/admin/edit-notification' element={<EditScheduleNotification />} />
 
 
             </Route>

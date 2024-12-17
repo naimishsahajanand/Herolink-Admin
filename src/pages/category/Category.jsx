@@ -3,8 +3,10 @@ import DataTable from "react-data-table-component";
 import axiosInstance, { authHeader } from "../../helper/axios";
 import toast from "react-hot-toast";
 import DeleteModal from "../../components/modal/delete/DeleteModal";
-import AddCategory from "../../components/offcanvas/category/AddCategory";
-import EditCategory from "../../components/offcanvas/category/EditCategory";
+// import AddCategory from "../../components/offcanvas/category/AddCategory";
+// import EditCategory from "../../components/offcanvas/category/EditCategory";
+import AddCategory from "../../components/modal/Category/AddCategory";
+import EditCategory from "../../components/modal/Category/EditCategory";
 
 const Category = () => {
     const [data, setData] = useState([]);
@@ -39,8 +41,6 @@ const Category = () => {
         try {
 
             const data = await axiosInstance.get(`/admin/category/list`, authHeader());
-            console.log("data", data?.data?.status);
-
 
             if (data?.data?.status === true) {
                 setData(data?.data?.data);
@@ -81,25 +81,41 @@ const Category = () => {
         {
             name: 'ID',
             selector: (_, index) => (currentPage - 1) * perPage + (index + 1),
-            width: '400px',
+            width: '100px',
+            left: true,
         },
         {
             name: 'Category',
             selector: row => row.name,
-            width: '400px'
-
+            width: '300px',
+            left: true,
         },
         {
             name: 'Status',
             selector: row => <div className={`m-auto ${row.status === "active" ? "active" : "in-active"}`}>
                 {row.status}
             </div>,
-            width: '400px'
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
         },
         {
             name: 'Action',
             selector: row => (
-                <div className="d-flex align-items-center">
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', gap: '8px' }}>
                         <img src="/images/pencil-fill (1).png" alt="" onClick={() => {
                             setEditShow(true);
@@ -111,67 +127,24 @@ const Category = () => {
                         }} style={{ cursor: 'pointer', height: '20px', width: '20px' }} />
                     </div>
                 </div>
-            )
+            ),
+            width: '100px',
         }
     ];
-    // const customStyles = {
-    //     rows: {
-    //         style: {
-    //             backgroundColor: "#000000",
-    //             color: '#FFF',
-    //             fontSize: '14px',
-    //             // borderBottom: '1px solid #FFF',
-    //         },
-    //     },
-    //     headRow: {
-    //         style: {
-    //             backgroundColor: "#000000",
-    //             color: '#FFF',
-    //             fontSize: '16px',
-    //             // borderBottom: '1px solid #FFF',
-    //         },
-    //     },
-    //     pagination: {
-    //         style: {
-    //             backgroundColor: "#000000",
-    //             color: '#FFF',
-    //         },
-    //         pageButtonsStyle: {
-    //             backgroundColor: "#ffffff",
-    //             color: "#000000",
-    //             border: "1px solid #ddd",
-    //             borderRadius: "4px",
-    //             padding: "5px 10px",
-    //             margin: "0 5px",
-    //             cursor: "pointer",
-    //             '&:hover': {
-    //                 backgroundColor: '#f1f1f1',
-    //             },
-    //             '&:disabled': {
-    //                 backgroundColor: "#f8f8f8",
-    //                 color: "#cccccc",
-    //                 cursor: "not-allowed",
-    //             },
-    //         },
-    //         icons: {
-    //             previous: <img src="/icons/prev-white.png" alt="Previous" style={{ filter: 'invert(1)' }} />, // Custom white icon for "Previous"
-    //             next: <img src="/icons/next-white.png" alt="Next" style={{ filter: 'invert(1)' }} />,       // Custom white icon for "Next"
-    //         },
-    //     },
-    // };
 
     const customStyles = {
         table: {
             style: {
                 backgroundColor: "#fff0",
-                color: '#FFF'
+                color: '#FFF',
             },
         },
         rows: {
             style: {
                 backgroundColor: "#fff0 ",
                 color: '#FFF',
-
+                paddingLeft: '20px',
+                paddingRight: '20px',
             },
         },
         headRow: {
@@ -180,6 +153,18 @@ const Category = () => {
                 color: '#FFF',
                 fontSize: '14px',
                 borderBottom: '1px solid #FFF',
+                paddingLeft: '20px',
+                paddingRight: '20px',
+            },
+        },
+        headerCell: {
+            style: {
+                backgroundColor: "#fff0",
+                color: '#FFF',
+                fontSize: '14px',
+                borderBottom: '1px solid #FFF',
+                // paddingLeft: '20px',
+                // paddingRight: '20px',
 
             },
         },
@@ -192,8 +177,9 @@ const Category = () => {
     }
 
 
+
+
     const filteredData = data?.filter((item) => {
-        console.log("item", item);
 
         const searchStr = `${item.name} ${item?.role}`.toLowerCase();
         return searchStr.includes(filterText.toLowerCase());
@@ -210,6 +196,7 @@ const Category = () => {
         setPerPage(newPerPage);
         setCurrentPage(1);
     };
+
     if (error) return <h1>{error}</h1>;
 
     return (
@@ -255,6 +242,17 @@ const Category = () => {
                                         // theme={2 === 1 ? "dark" : "default"}
                                         customStyles={customStyles}
                                         theme="dark"
+                                        noDataComponent={
+                                            <div style={{
+                                                backgroundColor: "#1b19198f",
+                                                color: "#FFF",
+                                                padding: "20px",
+                                                textAlign: "center",
+                                                width: '100%'
+                                            }}>
+                                                No data found.
+                                            </div>
+                                        }
                                     />
                                 </div>
                             </div>

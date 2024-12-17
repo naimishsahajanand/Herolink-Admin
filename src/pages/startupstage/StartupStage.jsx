@@ -5,8 +5,11 @@ import axiosInstance, { authHeader } from "../../helper/axios";
 import toast from "react-hot-toast";
 import { Form } from "react-bootstrap";
 import DeleteModal from "../../components/modal/delete/DeleteModal";
-import AddStartupstage from "../../components/offcanvas/startupstage/AddStartupstage";
-import EditStartupstage from "../../components/offcanvas/startupstage/EditStartupstage";
+// import AddStartupstage from "../../components/offcanvas/startupstage/AddStartupstage";
+// import EditStartupstage from "../../components/offcanvas/startupstage/EditStartupstage";
+
+import AddStartupstage from "../../components/modal/startupstage/AddStartupstage";
+import EditStartupstage from "../../components/modal/startupstage/EditStartupstage";
 
 const Startupstage = () => {
     const [data, setData] = useState([]);
@@ -41,8 +44,6 @@ const Startupstage = () => {
         try {
 
             const data = await axiosInstance.get(`/admin/startup-stage/list`, authHeader());
-            console.log("data", data?.data?.status);
-
 
             if (data?.data?.status === true) {
                 setData(data?.data?.data);
@@ -82,21 +83,42 @@ const Startupstage = () => {
     const columns = [
         {
             name: 'ID',
-            selector: (_, index) => (currentPage - 1) * perPage + (index + 1),
-            width: '400px',
+            cell: (_, index) => (
+                <div >
+                    {(currentPage - 1) * perPage + (index + 1)}
+                </div>
+            ),
+            width: '100px',
+            left: true,
+
         },
         {
             name: 'Startup Stage',
             selector: row => row.name,
-            width: '400px'
-
+            left: true,
+            width: '300px',
         },
         {
             name: 'Status',
             selector: row => <div className={`m-auto ${row.status === "active" ? "active" : "in-active"}`}>
                 {row.status}
             </div>,
-            width: '400px'
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
         },
         {
             name: 'Action',
@@ -113,21 +135,24 @@ const Startupstage = () => {
                         }} style={{ cursor: 'pointer', height: '20px', width: '20px' }} />
                     </div>
                 </div>
-            )
+            ),
+            width: '100px'
         }
     ];
+
     const customStyles = {
         table: {
             style: {
                 backgroundColor: "#fff0",
-                color: '#FFF'
+                color: '#FFF',
             },
         },
         rows: {
             style: {
                 backgroundColor: "#fff0 ",
                 color: '#FFF',
-
+                paddingLeft: '20px',
+                paddingRight: '20px',
             },
         },
         headRow: {
@@ -136,6 +161,18 @@ const Startupstage = () => {
                 color: '#FFF',
                 fontSize: '14px',
                 borderBottom: '1px solid #FFF',
+                paddingLeft: '20px',
+                paddingRight: '20px',
+            },
+        },
+        headerCell: {
+            style: {
+                backgroundColor: "#fff0",
+                color: '#FFF',
+                fontSize: '14px',
+                borderBottom: '1px solid #FFF',
+                paddingLeft: '20px',
+                paddingRight: '20px',
 
             },
         },
@@ -149,8 +186,6 @@ const Startupstage = () => {
 
 
     const filteredData = data?.filter((item) => {
-        console.log("item", item);
-
         const searchStr = `${item.name} ${item?.role}`.toLowerCase();
         return searchStr.includes(filterText.toLowerCase());
     });
@@ -211,6 +246,17 @@ const Startupstage = () => {
                                         // striped
                                         // theme={2 === 1 ? "dark" : "default"}
                                         customStyles={customStyles}
+                                        noDataComponent={
+                                            <div style={{
+                                                backgroundColor: "#1b19198f",
+                                                color: "#FFF",
+                                                padding: "20px",
+                                                textAlign: "center",
+                                                width: '100%'
+                                            }}>
+                                                No data found.
+                                            </div>
+                                        }
                                     />
                                 </div>
                             </div>

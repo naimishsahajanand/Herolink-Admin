@@ -108,7 +108,7 @@ const EditIndustry = ({ show, handleClose, editData, fetchIndustryData }) => {
                                     checked={formData.status === "inactive"}
                                     onChange={handleChange}
                                 />
-                                <label className="form-check-label" htmlFor="statusInactive">Inactive</label>
+                                <label className="form-check-label" htmlFor="statusInactive">InActive</label>
                             </div>
                         </div>
                     </div>

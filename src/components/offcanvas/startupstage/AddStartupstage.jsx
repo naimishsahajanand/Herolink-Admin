@@ -50,9 +50,6 @@ const AddStartupstage = ({ show, handleClose, fetchStartupStageData }) => {
         try {
 
             const data = await axiosInstance.post(`/admin/startup-stage/add`, payload, authHeader());
-            console.log('====================================');
-            console.log("categorydata", data);
-            console.log('====================================');
             if (data?.data?.status === true) {
                 toast.success("Successfully Startup Stage Added!");
                 setFormData(initialState);

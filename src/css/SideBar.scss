@@ -526,7 +526,6 @@
 }
 
 .menu-item {
-    /* Default styles for the menu items */
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 10px;
@@ -738,6 +737,10 @@
 
 .layout.rtl .sidebar.collapsed .menu>ul>.menu-item.sub-menu>.sub-menu-list {
     margin-left: -3px !important;
+}
+
+.sub-menu-view {
+    padding: 0px 10px 0px 10px;
 }
 
 @media (max-width: 576px) {

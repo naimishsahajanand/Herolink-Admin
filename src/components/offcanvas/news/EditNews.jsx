@@ -20,9 +20,6 @@ const EditNews = ({ show, handleClose, editData, fetchNewsData }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [editorData, setEditorData] = useState('');
     const [imagePreview, setImagePreview] = useState(null); // For image preview
-    console.log('====================================');
-    console.log("formDataformDataformData", formData);
-    console.log('====================================');
     useEffect(() => {
         if (editData) {
             setFormData({
@@ -48,9 +45,6 @@ const EditNews = ({ show, handleClose, editData, fetchNewsData }) => {
     // handleChange
     const handleChange = (e) => {
         const { name, value, files, type } = e.target;
-        console.log('====================================');
-        console.log("files", files);
-        console.log('====================================');
         if (files && files.length > 0) {
             setFormData((prev) => ({
                 ...prev,
@@ -77,9 +71,6 @@ const EditNews = ({ show, handleClose, editData, fetchNewsData }) => {
                 status: formData?.status,
                 image: formData?.image
             }
-            console.log('====================================');
-            console.log("payload", payload, formData?.image);
-            console.log('====================================');
             const data = await axiosInstance.put(`/admin/news/edit/${formData?.id}`, payload, authImageHeader());
 
 
@@ -181,7 +172,7 @@ const EditNews = ({ show, handleClose, editData, fetchNewsData }) => {
                                     checked={formData.status === "inactive"}
                                     onChange={handleChange}
                                 />
-                                <label className="form-check-label" htmlFor="statusInactive">Inactive</label>
+                                <label className="form-check-label" htmlFor="statusInactive">InActive</label>
                             </div>
                         </div>
                     </div>

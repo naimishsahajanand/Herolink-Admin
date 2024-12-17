@@ -60,7 +60,6 @@ const EditBusinessRightNow = ({ show, handleClose, editData, fetchBusinessRightN
             }
             const data = await axiosInstance.put(`/admin/your-business-at-right-now/edit/${formData?.id}`, payload, authHeader());
 
-
             if (data?.data?.status === true) {
                 toast.success("Startup Stage edited successfully!");
                 setFormData(initialState);
@@ -139,7 +138,7 @@ const EditBusinessRightNow = ({ show, handleClose, editData, fetchBusinessRightN
                                     checked={formData.status === "inactive"}
                                     onChange={handleChange}
                                 />
-                                <label className="form-check-label" htmlFor="statusInactive">Inactive</label>
+                                <label className="form-check-label" htmlFor="statusInactive">InActive</label>
                             </div>
                         </div>
                     </div>

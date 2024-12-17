@@ -2,18 +2,14 @@ import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import axiosInstance, { authHeader } from "../../helper/axios";
 import toast from "react-hot-toast";
-
 import DeleteModal from "../../components/modal/delete/DeleteModal";
-import AddConsumer from "../../components/offcanvas/consumer/AddConsumer";
-import EditConsumer from "../../components/offcanvas/consumer/EditConsumer";
-import AddPlan from "../../components/plan/AddPlan";
-import EditPlan from "../../components/plan/EditPlan";
-import AddArticle from "../../components/offcanvas/article/AddArticle";
-import EditArticle from "../../components/offcanvas/article/EditArticle";
 import AddNews from "../../components/offcanvas/news/AddNews";
 import EditNews from "../../components/offcanvas/news/EditNews";
+import { useNavigate } from "react-router-dom";
 
 const News = () => {
+    const navigate = useNavigate();
+
     const [data, setData] = useState([]);
     const [filterText, setFilterText] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -46,8 +42,6 @@ const News = () => {
         try {
 
             const data = await axiosInstance.get(`/admin/news/list`, authHeader());
-            console.log("data", data?.data?.status);
-
 
             if (data?.data?.status === true) {
                 setData(data?.data?.data);
@@ -88,23 +82,35 @@ const News = () => {
         {
             name: 'ID',
             selector: (_, index) => (currentPage - 1) * perPage + (index + 1),
-            width: '300px',
+            width: '100px',
+            left: true,
         },
         {
-            name: 'Article',
+            name: 'News',
             selector: row => row.title,
-            width: '300px'
+            width: '400px'
+        },
+        {
+            name: 'Image',
+            selector: row => <img src={row.image} height={60} />,
+        },
+        {
+            name: 'Uploaded By',
+            selector: row => row.uploadedBy,
         },
         {
             name: 'Status',
             selector: row => <div className={`m-auto ${row.status === "active" ? "active" : "in-active"}`}>
                 {row.status}
             </div>,
-            width: '200px'
         },
         {
-            name: 'Image',
-            selector: row => <img src={row.image} height={60} />,
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
         },
         {
             name: 'Action',
@@ -112,8 +118,10 @@ const News = () => {
                 <div className="d-flex align-items-center">
                     <div style={{ display: 'flex', justifyContent: 'space-between', gap: '8px' }}>
                         <img src="/images/pencil-white.png" alt="" onClick={() => {
-                            setEditShow(true);
-                            setEditData(row);
+                            // setEditShow(true);
+                            // setEditData(row);  
+                            navigate("/admin/edit-news")
+                            localStorage.setItem("edit-news", JSON.stringify(row));
                         }} style={{ cursor: 'pointer', height: '20px', width: '20px' }} />
                         <img src="/images/delete-white.png" alt="" onClick={() => {
                             setDeleteShow(true);
@@ -121,21 +129,23 @@ const News = () => {
                         }} style={{ cursor: 'pointer', height: '20px', width: '20px' }} />
                     </div>
                 </div>
-            )
+            ),
+            width: '100px',
         }
     ];
     const customStyles = {
         table: {
             style: {
                 backgroundColor: "#fff0",
-                color: '#FFF'
+                color: '#FFF',
             },
         },
         rows: {
             style: {
                 backgroundColor: "#fff0 ",
                 color: '#FFF',
-
+                paddingLeft: '20px',
+                paddingRight: '20px',
             },
         },
         headRow: {
@@ -144,6 +154,18 @@ const News = () => {
                 color: '#FFF',
                 fontSize: '14px',
                 borderBottom: '1px solid #FFF',
+                paddingLeft: '20px',
+                paddingRight: '20px',
+            },
+        },
+        headerCell: {
+            style: {
+                backgroundColor: "#fff0",
+                color: '#FFF',
+                fontSize: '14px',
+                borderBottom: '1px solid #FFF',
+                paddingLeft: '20px',
+                paddingRight: '20px',
 
             },
         },
@@ -156,8 +178,8 @@ const News = () => {
     };
 
 
+
     const filteredData = data?.filter((item) => {
-        console.log("item", item);
 
         const searchStr = `${item.name} ${item?.role}`.toLowerCase();
         return searchStr.includes(filterText.toLowerCase());
@@ -185,7 +207,12 @@ const News = () => {
                             <div className="card-header">
                                 <div className="d-flex align-items-center justify-content-between flex-wrap gap-3">
                                     <h4 className="mb-0 page-title">News List</h4>
-                                    <button className="add-btn" type="button" onClick={() => setAddShow(true)}>
+                                    <button className="add-btn" type="button"
+                                        onClick={() =>
+                                            // setAddShow(true)
+                                            navigate("/admin/add-news")
+                                        }
+                                    >
                                         + Add New News
                                     </button>
                                 </div>
@@ -219,6 +246,17 @@ const News = () => {
                                         // theme={2 === 1 ? "dark" : "default"}
                                         customStyles={customStyles}
                                         theme="dark"
+                                        noDataComponent={
+                                            <div style={{
+                                                backgroundColor: "#1b19198f",
+                                                color: "#FFF",
+                                                padding: "20px",
+                                                textAlign: "center",
+                                                width: '100%'
+                                            }}>
+                                                No data found.
+                                            </div>
+                                        }
                                     />
                                 </div>
                             </div>

@@ -50,9 +50,6 @@ const AddConsumer = ({ show, handleClose, fetchConsumerData }) => {
         try {
 
             const data = await axiosInstance.post(`/admin/consumer-segment/add`, payload, authHeader());
-            console.log('====================================');
-            console.log("categorydata", data);
-            console.log('====================================');
             if (data?.data?.status === true) {
                 toast.success("Successfully Consumer Segment Added!");
                 setFormData(initialState);
@@ -91,7 +88,7 @@ const AddConsumer = ({ show, handleClose, fetchConsumerData }) => {
                                 required
                             />
                         </div>
-                        <div>
+                        <div className='mb-3'>
                             <label htmlFor="name" className="form-label">Description: *</label>
                             <CKEditor
                                 name="description"

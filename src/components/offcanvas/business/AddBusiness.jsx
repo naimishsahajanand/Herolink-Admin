@@ -38,9 +38,6 @@ const AddBusiness = ({ show, handleClose, fetchBusinessData }) => {
         try {
 
             const data = await axiosInstance.post(`/admin/business/add`, payload, authHeader());
-            console.log('====================================');
-            console.log("categorydata", data);
-            console.log('====================================');
             if (data?.data?.status === true) {
                 toast.success("Successfully Business Added!");
                 setFormData(initialState);

@@ -20,9 +20,6 @@ const EditArticle = ({ show, handleClose, editData, fetchArticleData }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [editorData, setEditorData] = useState('');
     const [imagePreview, setImagePreview] = useState(null); // For image preview
-    console.log('====================================');
-    console.log("formDataformDataformData", formData);
-    console.log('====================================');
     useEffect(() => {
         if (editData) {
             setFormData({
@@ -48,9 +45,6 @@ const EditArticle = ({ show, handleClose, editData, fetchArticleData }) => {
     // handleChange
     const handleChange = (e) => {
         const { name, value, files, type } = e.target;
-        console.log('====================================');
-        console.log("files", files);
-        console.log('====================================');
         if (files && files.length > 0) {
             setFormData((prev) => ({
                 ...prev,
@@ -77,11 +71,7 @@ const EditArticle = ({ show, handleClose, editData, fetchArticleData }) => {
                 status: formData?.status,
                 image: formData?.image
             }
-            console.log('====================================');
-            console.log("payload", payload, formData?.image);
-            console.log('====================================');
             const data = await axiosInstance.put(`/admin/article/edit/${formData?.id}`, payload, authImageHeader());
-
 
             if (data?.data?.status === true) {
                 toast.success("Article edited successfully!");
@@ -109,16 +99,16 @@ const EditArticle = ({ show, handleClose, editData, fetchArticleData }) => {
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="title" className="form-label">Title: *</label>
-                        <input
-                            type="text"
-                            name="title"
-                            className="form-control"
-                            id="title"
-                            placeholder="Enter Title"
-                            value={formData.title}
-                            onChange={handleChange}
-                            required
-                        />
+                            <input
+                                type="text"
+                                name="title"
+                                className="form-control"
+                                id="title"
+                                placeholder="Enter Title"
+                                value={formData.title}
+                                onChange={handleChange}
+                                required
+                            />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="image" className="form-label">Image: *</label>
@@ -181,7 +171,7 @@ const EditArticle = ({ show, handleClose, editData, fetchArticleData }) => {
                                     checked={formData.status === "inactive"}
                                     onChange={handleChange}
                                 />
-                                <label className="form-check-label" htmlFor="statusInactive">Inactive</label>
+                                <label className="form-check-label" htmlFor="statusInactive">InActive</label>
                             </div>
                         </div>
                     </div>

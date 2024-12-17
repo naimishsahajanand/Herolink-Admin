@@ -4,8 +4,10 @@ import axiosInstance, { authHeader } from "../../helper/axios";
 import toast from "react-hot-toast";
 import { Form } from "react-bootstrap";
 import DeleteModal from "../../components/modal/delete/DeleteModal";
-import AddBusinessRightNow from "../../components/offcanvas/businessRightNow/AddBusinessRightNow";
-import EditBusinessRightNow from "../../components/offcanvas/businessRightNow/EditBusinessRightNow";
+// import AddBusinessRightNow from "../../components/offcanvas/businessRightNow/AddBusinessRightNow";
+// import EditBusinessRightNow from "../../components/offcanvas/businessRightNow/EditBusinessRightNow";
+import AddBusinessRightNow from "../../components/modal/businessRightNow/AddBusinessRightNow";
+import EditBusinessRightNow from "../../components/modal/businessRightNow/EditBusinessRightNow";
 
 const BusinessRightNow = () => {
     const [data, setData] = useState([]);
@@ -40,8 +42,6 @@ const BusinessRightNow = () => {
         try {
 
             const data = await axiosInstance.get(`/admin/your-business-at-right-now/list`, authHeader());
-            console.log("data", data?.data?.status);
-
 
             if (data?.data?.status === true) {
                 setData(data?.data?.data);
@@ -82,20 +82,32 @@ const BusinessRightNow = () => {
         {
             name: 'ID',
             selector: (_, index) => (currentPage - 1) * perPage + (index + 1),
-            width: '400px',
+            width: '100px',
+            left: true,
         },
         {
             name: 'Your Business Right Now ',
             selector: row => row.name,
-            width: '400px'
-
+            left: true,
+            width: '300px',
         },
         {
             name: 'Status',
             selector: row => <div className={`m-auto ${row.status === "active" ? "active" : "in-active"}`}>
                 {row.status}
             </div>,
-            width: '400px'
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
+        },
+        {
+            name: '',
+            selector: row => <div></div>,
         },
         {
             name: 'Action',
@@ -112,21 +124,23 @@ const BusinessRightNow = () => {
                         }} style={{ cursor: 'pointer', height: '20px', width: '20px' }} />
                     </div>
                 </div>
-            )
+            ),
+            width: '100px'
         }
     ];
     const customStyles = {
         table: {
             style: {
                 backgroundColor: "#fff0",
-                color: '#FFF'
+                color: '#FFF',
             },
         },
         rows: {
             style: {
                 backgroundColor: "#fff0 ",
                 color: '#FFF',
-
+                paddingLeft: '20px',
+                paddingRight: '20px',
             },
         },
         headRow: {
@@ -135,6 +149,18 @@ const BusinessRightNow = () => {
                 color: '#FFF',
                 fontSize: '14px',
                 borderBottom: '1px solid #FFF',
+                paddingLeft: '20px',
+                paddingRight: '20px',
+            },
+        },
+        headerCell: {
+            style: {
+                backgroundColor: "#fff0",
+                color: '#FFF',
+                fontSize: '14px',
+                borderBottom: '1px solid #FFF',
+                paddingLeft: '20px',
+                paddingRight: '20px',
 
             },
         },
@@ -147,8 +173,8 @@ const BusinessRightNow = () => {
     };
 
 
+
     const filteredData = data?.filter((item) => {
-        console.log("item", item);
 
         const searchStr = `${item.name} ${item?.role}`.toLowerCase();
         return searchStr.includes(filterText.toLowerCase());
@@ -210,6 +236,17 @@ const BusinessRightNow = () => {
                                         // striped
                                         // theme={2 === 1 ? "dark" : "default"}
                                         customStyles={customStyles}
+                                        noDataComponent={
+                                            <div style={{
+                                                backgroundColor: "#1b19198f",
+                                                color: "#FFF",
+                                                padding: "20px",
+                                                textAlign: "center",
+                                                width: '100%'
+                                            }}>
+                                                No data found.
+                                            </div>
+                                        }
                                     />
                                 </div>
                             </div>

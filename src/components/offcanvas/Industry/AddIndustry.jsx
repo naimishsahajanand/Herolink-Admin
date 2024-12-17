@@ -38,9 +38,6 @@ const AddIndustry = ({ show, handleClose, fetchIndustryData }) => {
         try {
 
             const data = await axiosInstance.post(`/admin/industry/add`, payload, authHeader());
-            console.log('====================================');
-            console.log("categorydata", data);
-            console.log('====================================');
             if (data?.data?.status === true) {
                 toast.success("Successfully Industry Added!");
                 setFormData(initialState);

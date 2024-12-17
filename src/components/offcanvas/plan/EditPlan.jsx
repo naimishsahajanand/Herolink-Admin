@@ -4,7 +4,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import toast from 'react-hot-toast';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import axiosInstance, { authHeader } from '../../helper/axios';
+import axiosInstance, { authHeader } from '../../../helper/axios';
 
 const initialState = {
     id: "",
@@ -140,7 +140,7 @@ const EditPlan = ({ show, handleClose, editData, fetchPlanData }) => {
                                     checked={formData.status === "inactive"}
                                     onChange={handleChange}
                                 />
-                                <label className="form-check-label" htmlFor="statusInactive">Inactive</label>
+                                <label className="form-check-label" htmlFor="statusInactive">InActive</label>
                             </div>
                         </div>
                     </div>
