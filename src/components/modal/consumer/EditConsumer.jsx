@@ -76,7 +76,7 @@ const EditConsumer = ({ show, handleClose, editData, fetchConsumerData }) => {
         }
     };
 
-    
+
     return (
         <Modal centered show={show} onHide={handleClose} className="form-modal">
             <div className="modal-header" closeButton>

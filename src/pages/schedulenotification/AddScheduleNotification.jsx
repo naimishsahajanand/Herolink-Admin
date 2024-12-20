@@ -94,7 +94,7 @@ const AddScheduleNotification = () => {
                 toast.success("Successfully Schedule Notification Created!");
                 setFormData(initialState);
                 setEditorData('')
-                navigate('/admin/schedule-notification');
+                navigate('/admin/notification');
             } else {
                 toast.error(data?.data?.message);
             }
@@ -220,7 +220,7 @@ const AddScheduleNotification = () => {
                                                 const formattedDate = formatDateToDisplay(isoDate);
                                                 setFormData({ ...formData, startDate: formattedDate });
                                             }}
-                                            min={currentDate}
+                                            // min={currentDate}
                                             required
                                         />
                                     </div>
@@ -240,7 +240,7 @@ const AddScheduleNotification = () => {
                                                     const formattedDate = formatDateToDisplay(isoDate);
                                                     setFormData({ ...formData, startDate: formattedDate });
                                                 }}
-                                                min={currentDate}
+                                                // min={currentDate}
                                                 required
                                             />
                                         </div>

@@ -1095,16 +1095,15 @@ const ViewUsers = () => {
                                                     value={data?.yourConsumerSegment}
                                                     readOnly /> */}
                                                 {
-                                                    data?.yourConsumerSegmentObj === null ?
+                                                    data?.consumerSegmentObj === null ?
                                                         <div className='listing-blanck'>
-                                                            <div className='form-label'>{data?.yourConsumerSegmentObj?.name}</div>
-                                                            <div className='form-label' dangerouslySetInnerHTML={{ __html: data?.yourConsumerSegmentObj?.description }} />
+                                                            <div className='form-label'>{data?.consumerSegmentObj?.name}</div>
+                                                            <div className='form-label' dangerouslySetInnerHTML={{ __html: data?.consumerSegmentObj?.description }} />
                                                         </div> :
                                                         <div className='listing'>
-                                                            <div className='form-label'>{data?.yourConsumerSegmentObj?.name}</div>
-                                                            <div className='form-label' dangerouslySetInnerHTML={{ __html: data?.yourConsumerSegmentObj?.description }} />
+                                                            <div className='form-label'>{data?.consumerSegmentObj?.name}</div>
+                                                            <div className='form-label' dangerouslySetInnerHTML={{ __html: data?.consumerSegmentObj?.description }} />
                                                         </div>
-
                                                 }
                                             </div>
                                             <div class="col-md-3 col-sm-6 mb-2">

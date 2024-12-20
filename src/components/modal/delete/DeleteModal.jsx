@@ -31,7 +31,7 @@ const DeleteModal = ({ show, handleClose, handleDelete, text }) => {
         <>
             <Modal centered show={show} onHide={handleClose} className="delete-modal">
                 <div className="">
-                    <h5 className="modal-title" id="deleteModalLabel">Delete Confirmation</h5>
+                    <h5 className="delete-modal-title" id="deleteModalLabel">Delete Confirmation</h5>
 
                     {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button> */}
                 </div>

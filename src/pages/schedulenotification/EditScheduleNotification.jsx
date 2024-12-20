@@ -67,6 +67,9 @@ const AddScheduleNotification = () => {
         }));
     };
     const currentDate = new Date().toISOString().split("T")[0];
+    console.log('====================================');
+    console.log("formData.startDate", formData.startDate, currentDate);
+    console.log('====================================');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -90,7 +93,7 @@ const AddScheduleNotification = () => {
                 toast.success("Successfully Schedule Notification Edited!");
                 setFormData(initialState);
                 setEditorData('')
-                navigate('/admin/schedule-notification');
+                navigate('/admin/notification');
             } else {
                 toast.error(data?.data?.message);
             }
@@ -232,7 +235,12 @@ const AddScheduleNotification = () => {
                                                 const formattedDate = formatDateToDisplay(isoDate);
                                                 setFormData({ ...formData, startDate: formattedDate });
                                             }}
-                                            min={currentDate}
+                                            // min={formatDateToISO(formData.startDate) || currentDate}
+                                            min={
+                                                formatDateToISO(formData.startDate) > (currentDate)
+                                                    ? currentDate
+                                                    : formatDateToISO(formData.startDate)
+                                            }
                                             required
                                         />
                                     </div>
@@ -252,7 +260,12 @@ const AddScheduleNotification = () => {
                                                     const formattedDate = formatDateToDisplay(isoDate);
                                                     setFormData({ ...formData, startDate: formattedDate });
                                                 }}
-                                                min={currentDate}
+                                                // min={formatDateToISO(formData.startDate) || currentDate}
+                                                min={
+                                                    new Date(formData.startDate) > new Date(currentDate)
+                                                        ? currentDate
+                                                        : formatDateToISO(formData.startDate)
+                                                }
                                                 required
                                             />
                                         </div>

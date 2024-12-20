@@ -27,7 +27,7 @@ const Schedulenotification = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
 
-    const deleteText = "schedule notification";
+    const deleteText = "notification";
 
     const handleClose = () => {
         setAddShow(false);

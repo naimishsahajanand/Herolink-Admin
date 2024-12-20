@@ -121,18 +121,24 @@ const Users = () => {
         {
             name: "Profile Complete",
             selector: (row) => {
+                console.log('====================================');
+                console.log("row", JSON.parse(row.step));
+                console.log('====================================');
+                const step = JSON.parse(row.step);
                 let percentage = 0;
                 if (row.role === "Founder") {
-                    percentage = (row.step * 100) / 8;
+                    percentage = (step * 100) / 8;
                 } else if (row.role === "Vendor") {
-                    percentage = (row.step * 100) / 4;
+                    percentage = (step * 100) / 4;
                 } else if (row.role === "Mentor") {
-                    percentage = (row.step * 100) / 7;
+                    percentage = (step * 100) / 7;
                 } else if (row.role === "Investor") {
-                    percentage = (row.step * 100) / 5;
+                    percentage = (step * 100) / 5;
                 }
                 const formattedPercentage = parseInt(percentage).toFixed(0);
-
+                console.log('====================================');
+                console.log("formattedPercentage", percentage, formattedPercentage);
+                console.log('====================================');
                 // Render the progress bar
                 return (
                     <Flex vertical gap="small" style={{ width: 150 }}>
@@ -140,13 +146,12 @@ const Users = () => {
                             percent={Math.min(parseInt(formattedPercentage), 100)} // Ensure percentage doesn't exceed 100
                             size="small"
                             trailColor="#ffff" // Set the trail color (slightly transparent white)
-                            format={(percent) => <span style={{ color: "#fff" }}>{percent}%</span>} // Custom text color
+                            format={(percent) => <span style={{ color: "#fff" }}>{percent}%</span>}
                         />
                     </Flex>
                 );
             },
             left: true,
-
         },
         {
             name: 'Created Date',
