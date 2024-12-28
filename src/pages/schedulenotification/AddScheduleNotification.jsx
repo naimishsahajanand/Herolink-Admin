@@ -220,7 +220,7 @@ const AddScheduleNotification = () => {
                                                 const formattedDate = formatDateToDisplay(isoDate);
                                                 setFormData({ ...formData, startDate: formattedDate });
                                             }}
-                                            // min={currentDate}
+                                            min={currentDate}
                                             required
                                         />
                                     </div>
@@ -240,7 +240,7 @@ const AddScheduleNotification = () => {
                                                     const formattedDate = formatDateToDisplay(isoDate);
                                                     setFormData({ ...formData, startDate: formattedDate });
                                                 }}
-                                                // min={currentDate}
+                                                min={currentDate}
                                                 required
                                             />
                                         </div>
